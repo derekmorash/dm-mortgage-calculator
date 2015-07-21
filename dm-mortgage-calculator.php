@@ -35,29 +35,52 @@ class dm_mortgage_widget extends WP_Widget {
      */
     public function widget( $args, $instance ) {
         echo $args['before_widget'];
+        ?>
+        <style>
+            .dm-mortgage-calculator {
+                background-color: aquamarine;
+            }
+        </style>
+        <div class="dm-mortgage-calculator"><!-- Container for widget -->
+        <?php
         if ( ! empty( $instance['title'] ) ) {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
         }
         ?>
-        <form>
-            <p>
-                <label for="price">Purchase Price:</label>
-                <?php
-                if ( empty( $instance['price'] ) ) {
-                ?>
-                    <input id="price" type='text' value="300,000" placeholder="Purchase Price" />
-                <?php
-                } else {
-                ?>
+            <form>
+                <div>
+                    <label for="price">Purchase Price:</label>
                     <input id="price" type='text' value="<?php echo $instance['price']; ?>" placeholder="Purchase Price" />
-                <?php
-                }
-                ?>
+                </div>
+                <div>
+                    <label for="downPayment">Down Payment:</label>
+                    <input id="downPayment" type='text' value="<?php echo $instance['downPayment']; ?>" placeholder="Down Payment" />
+                </div>
+                <div>
+                    <label for="term">Mortgage Term:</label>
+                    <input id="term" type='text' value="<?php echo $instance['term']; ?>" placeholder="Mortgage Term" />
+                </div>
+                <div>
+                    <label for="rate">Interest Rate:</label>
+                    <input id="rate" type='text' value="<?php echo $instance['rate']; ?>" placeholder="Interest Rate" />
+                </div>
+                <div>
+                    <label for="propertyTax">Property Tax:</label>
+                    <input id="propertyTax" type='text' value="<?php echo $instance['propertyTax']; ?>" placeholder="Property Tax" />
+                </div>
+                <div>
+                    <label for="propertyInsurance">Property Insurance:</label>
+                    <input id="propertyInsurance" type='text' value="<?php echo $instance['propertyInsurance']; ?>" placeholder="Property Insurance" />
+                </div>
 
-            </p>
-        </form>
+                <div>
+                    <input type="button" value="Submit"/>
+                </div>
+            </form>
+        </div> <!-- End Widget Container -->
         <?php
         echo $args['after_widget'];
+
     }
 
     /**
@@ -68,6 +91,11 @@ class dm_mortgage_widget extends WP_Widget {
     public function form( $instance ) {
         $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
         $price = esc_attr( $instance['price'] );
+        $downPayment = esc_attr( $instance['downPayment'] );
+        $term = esc_attr( $instance['term'] );
+        $rate = esc_attr( $instance['rate'] );
+        $propertyTax = esc_attr( $instance['propertyTax'] );
+        $propertyInsurance = esc_attr( $instance['propertyInsurance'] );
         ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
@@ -78,6 +106,31 @@ class dm_mortgage_widget extends WP_Widget {
             <label for="<?php echo $this->get_field_id( 'price' ); ?>"><?php _e( 'Purchase Price:' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'price' ); ?>" name="<?php echo $this->get_field_name( 'price' ); ?>"
                    type="text" value="<?php echo esc_attr( $price); ?>">
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'downPayment' ); ?>"><?php _e( 'Down Payment:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'downPayment' ); ?>" name="<?php echo $this->get_field_name( 'downPayment' ); ?>"
+                   type="text" value="<?php echo esc_attr( $downPayment); ?>">
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'term' ); ?>"><?php _e( 'Mortgage Term:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'term' ); ?>" name="<?php echo $this->get_field_name( 'term' ); ?>"
+                   type="text" value="<?php echo esc_attr( $term); ?>">
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'rate' ); ?>"><?php _e( 'Interest Rate:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'rate' ); ?>" name="<?php echo $this->get_field_name( 'rate' ); ?>"
+                   type="text" value="<?php echo esc_attr( $rate); ?>">
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'propertyTax' ); ?>"><?php _e( 'Property Tax:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'propertyTax' ); ?>" name="<?php echo $this->get_field_name( 'propertyTax' ); ?>"
+                   type="text" value="<?php echo esc_attr( $propertyTax); ?>">
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id( 'propertyInsurance' ); ?>"><?php _e( 'Property Insurance:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'propertyInsurance' ); ?>" name="<?php echo $this->get_field_name( 'propertyInsurance' ); ?>"
+                   type="text" value="<?php echo esc_attr( $propertyInsurance); ?>">
         </p>
     <?php
     }
@@ -93,6 +146,11 @@ class dm_mortgage_widget extends WP_Widget {
         $instance = $old_instance;
         $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
         $instance['price'] = strip_tags( $new_instance['price'] );
+        $instance['downPayment'] = strip_tags( $new_instance['downPayment'] );
+        $instance['term'] = strip_tags( $new_instance['term'] );
+        $instance['rate'] = strip_tags( $new_instance['rate'] );
+        $instance['propertyTax'] = strip_tags( $new_instance['propertyTax'] );
+        $instance['propertyInsurance'] = strip_tags( $new_instance['propertyInsurance'] );
 
         return $instance;
     }
