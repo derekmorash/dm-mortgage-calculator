@@ -50,7 +50,7 @@ class dm_mortgage_widget extends WP_Widget {
             <form>
                 <div>
                     <label for="price">Purchase Price:</label>
-                    <input id="price" type='text' value="<?php echo $instance['price']; ?>" placeholder="Purchase Price" />
+                    <input style="max-width: 100px;" id="price" type='text' value="<?php echo $instance['price']; ?>" placeholder="Purchase Price" />
                 </div>
                 <div>
                     <label for="downPayment">Down Payment:</label>
@@ -63,14 +63,6 @@ class dm_mortgage_widget extends WP_Widget {
                 <div>
                     <label for="rate">Interest Rate:</label>
                     <input id="rate" type='text' value="<?php echo $instance['rate']; ?>" placeholder="Interest Rate" />
-                </div>
-                <div>
-                    <label for="propertyTax">Property Tax:</label>
-                    <input id="propertyTax" type='text' value="<?php echo $instance['propertyTax']; ?>" placeholder="Property Tax" />
-                </div>
-                <div>
-                    <label for="propertyInsurance">Property Insurance:</label>
-                    <input id="propertyInsurance" type='text' value="<?php echo $instance['propertyInsurance']; ?>" placeholder="Property Insurance" />
                 </div>
 
                 <div>
@@ -94,8 +86,6 @@ class dm_mortgage_widget extends WP_Widget {
         $downPayment = esc_attr( $instance['downPayment'] );
         $term = esc_attr( $instance['term'] );
         $rate = esc_attr( $instance['rate'] );
-        $propertyTax = esc_attr( $instance['propertyTax'] );
-        $propertyInsurance = esc_attr( $instance['propertyInsurance'] );
         ?>
         <p>
             <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
@@ -122,16 +112,6 @@ class dm_mortgage_widget extends WP_Widget {
             <input class="widefat" id="<?php echo $this->get_field_id( 'rate' ); ?>" name="<?php echo $this->get_field_name( 'rate' ); ?>"
                    type="text" value="<?php echo esc_attr( $rate); ?>">
         </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'propertyTax' ); ?>"><?php _e( 'Property Tax:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'propertyTax' ); ?>" name="<?php echo $this->get_field_name( 'propertyTax' ); ?>"
-                   type="text" value="<?php echo esc_attr( $propertyTax); ?>">
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'propertyInsurance' ); ?>"><?php _e( 'Property Insurance:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'propertyInsurance' ); ?>" name="<?php echo $this->get_field_name( 'propertyInsurance' ); ?>"
-                   type="text" value="<?php echo esc_attr( $propertyInsurance); ?>">
-        </p>
     <?php
     }
 
@@ -149,8 +129,6 @@ class dm_mortgage_widget extends WP_Widget {
         $instance['downPayment'] = strip_tags( $new_instance['downPayment'] );
         $instance['term'] = strip_tags( $new_instance['term'] );
         $instance['rate'] = strip_tags( $new_instance['rate'] );
-        $instance['propertyTax'] = strip_tags( $new_instance['propertyTax'] );
-        $instance['propertyInsurance'] = strip_tags( $new_instance['propertyInsurance'] );
 
         return $instance;
     }
