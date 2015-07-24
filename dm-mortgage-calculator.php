@@ -90,17 +90,17 @@ class dm_mortgage_widget extends WP_Widget {
         <p>
             <label for="<?php echo $this->get_field_id( 'mortgageAmount' ); ?>"><?php _e( 'Mortgage Amount:' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'mortgageAmount' ); ?>" name="<?php echo $this->get_field_name( 'mortgageAmount' ); ?>"
-                   type="text" value="<?php echo esc_attr( $mortgageAmount); ?>">
+                   type="text" value="<?php echo esc_attr( $mortgageAmount ); ?>">
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'term' ); ?>"><?php _e( 'Mortgage Term:' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'term' ); ?>" name="<?php echo $this->get_field_name( 'term' ); ?>"
-                   type="text" value="<?php echo esc_attr( $term); ?>">
+                   type="text" value="<?php echo esc_attr( $term ); ?>">
         </p>
         <p>
             <label for="<?php echo $this->get_field_id( 'rate' ); ?>"><?php _e( 'Interest Rate:' ); ?></label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'rate' ); ?>" name="<?php echo $this->get_field_name( 'rate' ); ?>"
-                   type="text" value="<?php echo esc_attr( $rate); ?>">
+                   type="text" value="<?php echo esc_attr( $rate ); ?>">
         </p>
     <?php
     }
