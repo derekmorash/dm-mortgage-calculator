@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		Title Page
+	</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+</head>
+<body>
+	<div class="dm-widget">
+		<h2>
+			Mortgage Calculator
+		</h2>
+		<div id="dm-form-container" class="dm-form-container">
+			<form class="dm-form">
+				<fieldset id="dm-amount-field">
+					<label for="dm-amount" class="dm-form-label">Mortgage Amount: ($)</label> <input class="dm-form-input" id="dm-amount" type='text' placeholder="Mortgage Amount ($)">
+				</fieldset>
+				<fieldset id="dm-rate-field">
+					<label for="dm-rate" class="dm-form-label">Interest Rate: (%)</label> <input id="dm-rate" type='text' placeholder="Interest Rate (%)">
+				</fieldset>
+				<fieldset id="dm-term-field">
+					<label for="dm-term" class="dm-form-label">Mortgage Term: (years)</label> <input id="dm-term" type='text' placeholder="Mortgage Term (years)">
+				</fieldset>
+				<fieldset>
+					<input id="dm-submit" type="button" value="Submit"> <input id="dm-clear" type="button" value="Clear">
+				</fieldset>
+			</form>
+		</div>
+		<div id="dm-chart-container" class="dm-chart-container dm-hidden">
+			<p>
+				Estimated payment for your home
+			</p>
+			<p>
+				<span class="dm-bold">$1300</span> per month
+			</p>
+			<div id="dm-chart" style="clear: both;"></div>
+		</div>
+	</div>
+	<script src="functions.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>
