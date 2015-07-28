@@ -7,7 +7,7 @@
   border: 3px lightseagreen /*#EAF5FB*/ solid;
   border-top: 3px #01718D solid;
   overflow: hidden;
-  font-family: sans-serif;
+  font-family: inherit, sans-serif;
 }
 
 .dm-widget h2 {
@@ -19,7 +19,7 @@
 .dm-form-container {
     max-width: 100%;
   margin: 0 auto;
-  background-color: lightcoral;
+  /*background-color: lightcoral;*/
 }
 
 .dm-form {
@@ -35,8 +35,8 @@
 
 .dm-form-label {
   color: #920028;
-  float: left;
-  clear: both;
+  /*float: left;*/
+  /*clear: both;*/
 }
 
 .dm-form-input {

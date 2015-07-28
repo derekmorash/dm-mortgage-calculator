@@ -13,6 +13,9 @@ var dmRateRegex = /^\$?(?=.)(?:[1-9]\d{0,2}(?:,?\d{3})*)?(?:\.\d{2})?$/;
 /* animation event listener array */
 var endAnimation = ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'];
 
+/* chart values */
+var dmPrinciple = 0;
+
 /* when the form submit button is clicked */
 function submitForm() {
     dmSubmit.onclick = function() {
@@ -25,6 +28,8 @@ function submitForm() {
         var dmRateValidate = validateRate(dmRate);
 
         if(dmAmountValidate === true && dmRateValidate === true) {
+
+            dmPrinciple = dmTerm; //Set the global principle variable for the chart
 
             /* adds the animation classes to remove container */
             dmForm.className = "dm-form-container animated fadeOutDown";
@@ -115,7 +120,7 @@ function drawChart() {
     ['Payment', 'Principle ($)', 'Interest ($)', {
       role: 'annotation'
     }],
-    ['Mortgage Term', 300000, 50000, '']
+    ['Mortgage Term', dmPrinciple, 50000, '']
   ]);
 
   // Set chart options
