@@ -1,11 +1,11 @@
 .dm-widget {
   margin: 0 auto;
   display: block;
-  height: 100%;
-  max-width: 300px;
-  background-color: #fff;
-  border-radius: 5px;
-  border: 3px lightgray solid;
+  height: 450px;
+  max-width: 350px;
+  background-color: #ffffff;
+  border: 3px lightseagreen /*#EAF5FB*/ solid;
+  border-top: 3px #01718D solid;
   overflow: hidden;
   font-family: sans-serif;
 }
@@ -17,8 +17,9 @@
 }
 
 .dm-form-container {
+    max-width: 100%;
   margin: 0 auto;
-  background-color: gray;
+  background-color: lightcoral;
 }
 
 .dm-form {
@@ -28,6 +29,8 @@
 
 .dm-form fieldset {
   border: none;
+    max-width: 100%;
+    display: table;
 }
 
 .dm-form-label {
@@ -37,13 +40,33 @@
 }
 
 .dm-form-input {
+  display: block;
+  margin: 0;
   max-width: 100%;
+  appearance: none;
+  box-shadow: none;
+    padding: 10px;
+    border: solid 1px #dcdcdc;
+    transition: box-shadow 0.3s, border 0.3s;
+}
+
+.dm-form-input:focus,
+.dm-form-input.focus {
+    border: solid 1px #707070;
+    box-shadow: 0 0 5px 1px #969696;
 }
 
 .dm-chart-container {
-  width: 270px;
+  display: block;
+  max-width: 250px;
   margin: 0 auto;
+  text-align: center;
   background-color: lightblue;
+}
+
+#dm-chart {
+  display: block;
+  margin: 0 auto;
 }
 
 .dm-bold {
