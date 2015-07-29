@@ -7,7 +7,7 @@
   border: 3px lightseagreen /*#EAF5FB*/ solid;
   border-top: 3px #01718D solid;
   overflow: hidden;
-  font-family: inherit, sans-serif;
+  font-family: sans-serif;
 }
 
 .dm-widget h2 {

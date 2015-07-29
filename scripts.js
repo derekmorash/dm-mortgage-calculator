@@ -14,7 +14,7 @@ var dmRateRegex = /^\$?(?=.)(?:[1-9]\d{0,2}(?:,?\d{3})*)?(?:\.\d{2})?$/;
 var endAnimation = ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'];
 
 /* chart values */
-var dmPrinciple = 0;
+var dmPrinciple = 300000;
 
 /* when the form submit button is clicked */
 function submitForm() {
@@ -29,7 +29,7 @@ function submitForm() {
 
         if(dmAmountValidate === true && dmRateValidate === true) {
 
-            dmPrinciple = dmTerm; //Set the global principle variable for the chart
+            //dmPrinciple = dmTerm; //Set the global principle variable for the chart
 
             /* adds the animation classes to remove container */
             dmForm.className = "dm-form-container animated fadeOutDown";
