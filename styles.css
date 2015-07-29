@@ -7,7 +7,7 @@
   border: 3px lightseagreen /*#EAF5FB*/ solid;
   border-top: 3px #01718D solid;
   overflow: hidden;
-  font-family: sans-serif;
+  font-family: arial, sans-serif;
 }
 
 .dm-widget h2 {
@@ -71,6 +71,12 @@
 
 .dm-bold {
   font-weight: bold;
+}
+
+/* Error Messages */
+.dm-error {
+    background-color: red;
+    font-size: small;
 }
 
 /* hide elements */

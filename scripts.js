@@ -27,14 +27,13 @@ function submitForm() {
         var dmTerm = document.getElementById('dm-term').value;
 
         var dmAmountValidate = validateAmount(dmAmount); //validated the amount input
-        var dmRateValidate = validateRate(dmRate);
+        var dmRateValidate = validateRate(dmRate); //validate the rate input
 
         if(dmAmountValidate === true && dmRateValidate === true) {
 
             /* Set chart values */
             dmPrinciple = Number(dmAmount); //Set the global principle variable for the chart
             dmMonthlyPayment = dmCalculatePayment(dmAmount, dmRate, dmTerm); //calculate the monthly payment
-            alert(dmMonthlyPayment);
 
             /* adds the animation classes to remove container */
             dmForm.className = "dm-form-container animated fadeOutDown";
@@ -73,7 +72,7 @@ function dmCalculatePayment (amount, rate, term) {
 
     monthlyPayment = amount * ((rate * (Math.pow((1+rate),term))) / (Math.pow((1+rate),term) - 1)); //calculate monthly payment
 
-    return monthlyPayment;
+    return monthlyPayment; //return the monthly payment
 }
 
 /* validation */
