@@ -4,11 +4,11 @@ var dmChart = document.getElementById('dm-chart-container');
 
 /* buttons */
 var dmSubmit = document.getElementById('dm-submit');
-var dmClear = document.getElementById('dm-clear');
 
 /* regex */
 var dmAmountRegex = /^\$?(?=.)(?:[1-9]\d{0,2}(?:,?\d{3})*)?(?:\.\d{2})?$/;
 var dmRateRegex = /^\$?(?=.)(?:[1-9]\d{0,2}(?:,?\d{3})*)?(?:\.\d{2})?$/;
+var dmTermRegex = /^([^.0-]\d+|\d)$/gm;
 
 /* animation event listener array */
 var endAnimation = ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'];
@@ -31,8 +31,9 @@ function submitForm() {
 
         var dmAmountValidate = validateAmount(dmAmount); //validated the amount input
         var dmRateValidate = validateRate(dmRate); //validate the rate input
+        var dmTermValidate = validateTerm(dmTerm); //validate the term input
 
-        if(dmAmountValidate === true && dmRateValidate === true) {
+        if(dmAmountValidate === true && dmRateValidate === true && dmTermValidate === true) {
 
             /* Set chart values */
             dmPrinciple = Number(dmAmount); //Set the global principle variable for the chart
@@ -108,6 +109,8 @@ function validateRate(rate) { //function takes the input value
     var dmRateError = document.getElementById('dm-rate-error');
     var validation = false; //initial return value
 
+    dmRateError.className = "dm-error dm-hidden"; //ensure the error message is hidden by default
+
     if(rate === '') { //check if empty
         dmRateBox.className = 'dm-form-input dm-highlight-box'; //highlight box
         dmEmptyError.className = 'dm-error'; //display the empty error
@@ -118,6 +121,30 @@ function validateRate(rate) { //function takes the input value
         } else { //if regex returns false
             dmRateBox.className = 'dm-form-input dm-highlight-box'; //highlight box
             dmRateError.className = 'dm-error'; //display the error message
+            validation = false;
+        }
+    }
+
+    return validation;
+} //end validateRate function
+
+function validateTerm(term) { //function takes the input value
+    var dmTermBox = document.getElementById('dm-term'); //get input box element
+    var dmTermError = document.getElementById('dm-term-error');
+    var validation = false; //initial return value
+
+    dmTermError.className = "dm-error dm-hidden"; //ensure the error message is hidden by default
+
+    if(term === '') { //check if empty
+        dmTermBox.className = 'dm-form-input dm-highlight-box'; //highlight box
+        dmEmptyError.className = 'dm-error'; //display the empty error
+    } else { //if not empty check if regex match
+        if(dmTermRegex.test(term)) { //if regex returns true
+            dmTermBox.className = 'dm-form-input'; //remove highlight
+            validation = true; //set return value to true
+        } else { //if regex returns false
+            dmTermBox.className = 'dm-form-input dm-highlight-box'; //highlight box
+            dmTermError.className = 'dm-error'; //display the error message
             validation = false;
         }
     }
