@@ -61,7 +61,6 @@
   max-width: 250px;
   margin: 0 auto;
   text-align: center;
-  background-color: lightblue;
 }
 
 #dm-chart {
@@ -77,6 +76,10 @@
 .dm-error {
     background-color: red;
     font-size: small;
+}
+
+.dm-highlight-box {
+    border: 1px red solid;
 }
 
 /* hide elements */

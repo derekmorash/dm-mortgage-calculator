@@ -18,6 +18,9 @@ var dmPrinciple;
 var dmInterest;
 var dmMonthlyPayment;
 
+/* Empty boxes error message */
+var dmEmptyError = document.getElementById('dm-empty'); //made this global because it is used multiple times
+
 /* when the form submit button is clicked */
 function submitForm() {
     dmSubmit.onclick = function() {
@@ -78,39 +81,49 @@ function dmCalculatePayment (amount, rate, term) {
 /* validation */
 function validateAmount(amount) { //function takes the input value
     var dmAmountBox = document.getElementById('dm-amount'); //get input box element
+    var dmAmountError = document.getElementById('dm-amount-error');
     var validation = false; //initial return value
 
+    dmAmountError.className = "dm-error dm-hidden"; //ensure the error message is hidden by default
+
     if(amount === '') { //check if empty
-        dmAmountBox.style.border = '1px red solid';//highlight box show error message
+        dmAmountBox.className = 'dm-form-input dm-highlight-box'; //highlight box
+        dmEmptyError.className = 'dm-error'; //display the empty error
     } else { //if not empty check if regex match
         if(dmAmountRegex.test(amount)) { //if regex returns true
-        validation = true; //set return value to true
+            dmAmountBox.className = 'dm-form-input'; //remove highlight
+            validation = true; //set return value to true
         } else { //if regex returns false
+            dmAmountBox.className = 'dm-form-input dm-highlight-box'; //highlight box
+            dmAmountError.className = 'dm-error'; //display the error message
             validation = false;
-            dmAmountBox.style.border = '1px red solid'; //highlight box
         }
     }
 
     return validation;
-}
+} //end validateAmount function
 
 function validateRate(rate) { //function takes the input value
     var dmRateBox = document.getElementById('dm-rate'); //get input box element
+    var dmRateError = document.getElementById('dm-rate-error');
     var validation = false; //initial return value
 
     if(rate === '') { //check if empty
-        dmRateBox.style.border = '1px red solid'; //highlight box show error message
+        dmRateBox.className = 'dm-form-input dm-highlight-box'; //highlight box
+        dmEmptyError.className = 'dm-error'; //display the empty error
     } else { //if not empty check if regex match
         if(dmRateRegex.test(rate)) { //if regex returns true
+            dmRateBox.className = 'dm-form-input'; //remove highlight
             validation = true; //set return value to true
         } else { //if regex returns false
+            dmRateBox.className = 'dm-form-input dm-highlight-box'; //highlight box
+            dmRateError.className = 'dm-error'; //display the error message
             validation = false;
-            dmRateBox.style.border = '1px red solid'; //highlight box
         }
     }
 
     return validation;
-}
+} //end validateRate function
 
 /*
  * GOOGLE CHARTS
