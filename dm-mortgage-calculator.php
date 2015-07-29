@@ -39,6 +39,7 @@ class dm_mortgage_widget extends WP_Widget {
         <style>
             .dm-mortgage-calculator {
                 /*background-color: aquamarine;*/
+                /*font-family: sans-serif;*/
             }
         </style>
         <div class="dm-mortgage-calculator"><!-- Container for widget -->

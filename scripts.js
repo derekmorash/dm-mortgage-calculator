@@ -15,7 +15,8 @@ var endAnimation = ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', '
 
 /* chart values */
 var dmPrinciple;
-var dmInterest = 2.10;
+var dmInterest;
+var dmMonthlyPayment;
 
 /* when the form submit button is clicked */
 function submitForm() {
@@ -32,7 +33,8 @@ function submitForm() {
 
             /* Set chart values */
             dmPrinciple = Number(dmAmount); //Set the global principle variable for the chart
-            //dmInterest =
+            dmMonthlyPayment = dmCalculatePayment(dmAmount, dmRate, dmTerm); //calculate the monthly payment
+            alert(dmMonthlyPayment);
 
             /* adds the animation classes to remove container */
             dmForm.className = "dm-form-container animated fadeOutDown";
@@ -43,7 +45,7 @@ function submitForm() {
             * removes the animation classes and adds the hidden class.
             * Need to do one for each vendor prefix for full browser support.
             */
-            for (i = 0; i < endAnimation.length; i++) { //loop through each vendor prefix
+            for (var i = 0; i < endAnimation.length; i++) { //loop through each vendor prefix
             one(dmForm, endAnimation[i], function(event) {
                     dmForm.className = "dm-form-container dm-hidden"; //hide the form container
                     dmChart.className = "dm-chart-container animated fadeInDown"; //animate the chart container to come into view
@@ -62,8 +64,19 @@ function one(element, eventName, callback) {
   });
 }
 
-/* validation */
+/* calculate monthly payment */
+function dmCalculatePayment (amount, rate, term) {
+    var monthlyPayment;
+    amount = Number(amount);
+    rate = (Number(rate)/100)/12; //calculate monthly interest rate
+    term = Number(term)*12; //calculate the number of months
 
+    monthlyPayment = amount * ((rate * (Math.pow((1+rate),term))) / (Math.pow((1+rate),term) - 1)); //calculate monthly payment
+
+    return monthlyPayment;
+}
+
+/* validation */
 function validateAmount(amount) { //function takes the input value
     var dmAmountBox = document.getElementById('dm-amount'); //get input box element
     var validation = false; //initial return value
