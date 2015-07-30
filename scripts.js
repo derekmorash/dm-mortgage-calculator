@@ -17,6 +17,7 @@ var endAnimation = ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', '
 var dmPrinciple;
 var dmInterest;
 var dmMonthlyPayment;
+var dmOverallPayment;
 
 /* Empty boxes error message */
 var dmEmptyError = document.getElementById('dm-empty'); //made this global because it is used multiple times
@@ -37,11 +38,15 @@ function submitForm() {
 
             /* Set chart values */
             dmPrinciple = Number(dmAmount); //Set the global principle variable for the chart
+
             dmMonthlyPayment = dmCalculatePayment(dmAmount, dmRate, dmTerm); //calculate the monthly payment
+            document.getElementById('dm-monthly-payment').innerHTML = '$'+dmMonthlyPayment.toFixed(2); //display monthly payment
 
-            //display monthly payment
-            document.getElementById('dm-monthly-payment').innerHTML = '$'+dmMonthlyPayment.toFixed(2);
+            dmOverallPayment = dmMonthlyPayment * (dmTerm*12); //multiply the monthly payment by the number of months
+            document.getElementById('dm-overall-payment').innerHTML = '$'+dmOverallPayment.toFixed(2); //display overall payment
 
+            dmInterest = dmOverallPayment - dmAmount; //get the amount of interest to be payed
+            dmInterest = Number(dmInterest.toFixed(2));
 
             /* Animations */
             dmForm.className = "dm-form-container animated fadeOutDown"; // adds the animation classes to remove container
@@ -179,7 +184,7 @@ function drawChart() {
     ['Payment', 'Principle ($)', 'Interest ($)', {
       role: 'annotation'
     }],
-    ['Mortgage Term', dmPrinciple, 50000, '']
+    ['Mortgage Term', dmPrinciple, dmInterest, '']
   ]);
 
   // Set chart options

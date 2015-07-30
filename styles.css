@@ -1,11 +1,10 @@
 .dm-widget {
   margin: 0 auto;
   display: block;
-  height: 450px;
+  height: 500px;
   width: 250px;
   background-color: #ffffff;
-  border: 3px lightseagreen /*#EAF5FB*/ solid;
-  border-top: 3px #01718D solid;
+  border: 3px #999999 solid;
   overflow: hidden;
   font-family: arial, sans-serif;
 }
