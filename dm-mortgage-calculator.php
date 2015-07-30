@@ -42,31 +42,46 @@ class dm_mortgage_widget extends WP_Widget {
                 /*font-family: "Times New Roman";*/
             }
         </style>
-        <div class="dm-mortgage-calculator"><!-- Container for widget -->
+        <div class="dm-widget"><!-- Container for widget -->
         <?php
-        if ( ! empty( $instance['title'] ) ) {
-            echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
+        if ( ! empty( $instance['dmTitle'] ) ) {
+            echo $args['before_title'] . apply_filters( 'widget_title', $instance['dmTitle'] ). $args['after_title'];
         }
         ?>
-            <form>
-                <div>
-                    <label for="mortgageAmount">Mortgage Amount:</label>
-                    <input id="mortgageAmount" type='text' value="<?php echo $instance['mortgageAmount']; ?>" placeholder="Mortgage Amount" />
-                </div>
-                <div>
-                    <label for="term">Mortgage Term:</label>
-                    <input id="term" type='text' value="<?php echo $instance['term']; ?>" placeholder="Mortgage Term" />
-                </div>
-                <div>
-                    <label for="rate">Interest Rate:</label>
-                    <input id="rate" type='text' value="<?php echo $instance['rate']; ?>" placeholder="Interest Rate" />
-                </div>
+            <div id="dm-form-container" class="dm-form-container">
+                <form class="dm-form">
+                    <fieldset id="dm-amount-field">
+                        <label for="dm-amount" class="dm-form-label">Mortgage Amount: ($)</label>
+                        <input class="dm-form-input" id="dm-amount" type='text' value="<?php echo $instance['dmMortgageAmount']; ?>" placeholder="Mortgage Amount ($)" />
+                    </fieldset>
+                    <fieldset id="dm-rate-field">
+                        <label for="dm-rate" class="dm-form-label">Interest Rate: (%)</label>
+                        <input class="dm-form-input" id="dm-rate" type='text' value="<?php echo $instance['dmRate']; ?>" placeholder="Interest Rate (%)" />
+                    </fieldset>
+                    <fieldset id="dm-term-field">
+                        <label for="dm-term" class="dm-form-label">Mortgage Term: (years)</label>
+                    <input class="dm-form-input" id="dm-term" type='text' value="<?php echo $instance['dmTerm']; ?>" placeholder="Mortgage Term (years)" />
+                    </fieldset>
 
-                <div>
-                    <input type="button" value="Submit"/>
-                </div>
-            </form>
-        </div> <!-- End Widget Container -->
+                    <fieldset>
+                        <input id="dm-submit" type="button" value="Submit">
+                    </fieldset>
+                </form>
+                <!-- Validation Error Messages -->
+                <p id="dm-empty" class="dm-error dm-hidden">Please fill out the highlighted boxes.</p>
+                <p id="dm-amount-error" class="dm-error dm-hidden">Please enter a positive amount <br>(eg. 200000.00)</p>
+                <p id="dm-rate-error" class="dm-error dm-hidden">Please enter a rate with two decimal places (eg. 2.05)</p>
+                <p id="dm-term-error" class="dm-error dm-hidden">Please enter a valid number of years<br>(eg. 1-35)</p>
+            </div>
+            <div id="dm-chart-container" class="dm-chart-container dm-hidden">
+                <p>
+                    Estimated payment for your home
+                </p>
+                <p><span id="dm-monthly-payment" class="dm-bold"></span> per month</p>
+                <p><span id="dm-overall-payment" class="dm-bold"></span> overall</p>
+                <div id="dm-chart"></div>
+            </div>
+        </div>
         <?php
         echo $args['after_widget'];
 
@@ -78,30 +93,30 @@ class dm_mortgage_widget extends WP_Widget {
      * @param array $instance Previously saved values from database.
      */
     public function form( $instance ) {
-        $title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'New title', 'text_domain' );
-        $mortgageAmount = esc_attr( $instance['mortgageAmount'] );
-        $term = esc_attr( $instance['term'] );
-        $rate = esc_attr( $instance['rate'] );
+        $dmTitle = ! empty( $instance['dmTitle'] ) ? $instance['dmTitle'] : __( 'New title', 'text_domain' );
+        $dmMortgageAmount = esc_attr( $instance['dmMortgageAmount'] );
+        $dmRate = esc_attr( $instance['dmRate'] );
+        $dmTerm = esc_attr( $instance['dmTerm'] );
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>"
-                   type="text" value="<?php echo esc_attr( $title ); ?>">
+            <label for="<?php echo $this->get_field_id( 'dmTitle' ); ?>"><?php _e( 'Title:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'dmTitle' ); ?>" name="<?php echo $this->get_field_name( 'dmTitle' ); ?>"
+                   type="text" value="<?php echo esc_attr( $dmTitle ); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'mortgageAmount' ); ?>"><?php _e( 'Mortgage Amount:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'mortgageAmount' ); ?>" name="<?php echo $this->get_field_name( 'mortgageAmount' ); ?>"
-                   type="text" value="<?php echo esc_attr( $mortgageAmount ); ?>">
+            <label for="<?php echo $this->get_field_id( 'dmMortgageAmount' ); ?>"><?php _e( 'Mortgage Amount:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'dmMortgageAmount' ); ?>" name="<?php echo $this->get_field_name( 'dmMortgageAmount' ); ?>"
+                   type="text" value="<?php echo esc_attr( $dmMortgageAmount ); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'term' ); ?>"><?php _e( 'Mortgage Term:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'term' ); ?>" name="<?php echo $this->get_field_name( 'term' ); ?>"
-                   type="text" value="<?php echo esc_attr( $term ); ?>">
+            <label for="<?php echo $this->get_field_id( 'dmRate' ); ?>"><?php _e( 'Interest Rate:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'dmRate' ); ?>" name="<?php echo $this->get_field_name( 'dmRate' ); ?>"
+                   type="text" value="<?php echo esc_attr( $dmRate ); ?>">
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id( 'rate' ); ?>"><?php _e( 'Interest Rate:' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'rate' ); ?>" name="<?php echo $this->get_field_name( 'rate' ); ?>"
-                   type="text" value="<?php echo esc_attr( $rate ); ?>">
+            <label for="<?php echo $this->get_field_id( 'dmTerm' ); ?>"><?php _e( 'Mortgage Term:' ); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'dmTerm' ); ?>" name="<?php echo $this->get_field_name( 'dmTerm' ); ?>"
+                   type="text" value="<?php echo esc_attr( $dmTerm ); ?>">
         </p>
     <?php
     }
@@ -115,10 +130,10 @@ class dm_mortgage_widget extends WP_Widget {
      */
     public function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
-        $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-        $instance['mortgageAmount'] = strip_tags( $new_instance['mortgageAmount'] );
-        $instance['term'] = strip_tags( $new_instance['term'] );
-        $instance['rate'] = strip_tags( $new_instance['rate'] );
+        $instance['dmTitle'] = ( ! empty( $new_instance['dmTitle'] ) ) ? strip_tags( $new_instance['dmTitle'] ) : '';
+        $instance['dmMortgageAmount'] = strip_tags( $new_instance['dmMortgageAmount'] );
+        $instance['dmRate'] = strip_tags( $new_instance['dmRate'] );
+        $instance['dmTerm'] = strip_tags( $new_instance['dmTerm'] );
 
         return $instance;
     }
