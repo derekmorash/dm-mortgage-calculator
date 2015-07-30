@@ -36,12 +36,6 @@ class dm_mortgage_widget extends WP_Widget {
     public function widget( $args, $instance ) {
         echo $args['before_widget'];
         ?>
-        <style>
-            .dm-mortgage-calculator {
-                /*background-color: aquamarine;*/
-                /*font-family: "Times New Roman";*/
-            }
-        </style>
         <div class="dm-widget"><!-- Container for widget -->
         <?php
         if ( ! empty( $instance['dmTitle'] ) ) {
@@ -145,3 +139,14 @@ function register_dm_mortgage_widget() {
     register_widget( 'dm_mortgage_widget' );
 }
 add_action( 'widgets_init', 'register_dm_mortgage_widget' );
+
+//add css and js
+function dm_assets() {
+    wp_register_script('google-charts', 'https://www.google.com/jsapi', array(), null, false);
+    wp_enqueue_script('google-charts');
+    wp_register_script('dm-scripts', plugins_url( '/assets/js/scripts.js', __FILE__ ), array(), null, true);
+    wp_enqueue_script('dm-scripts');
+    wp_register_style( 'dm-styles', plugins_url('/assets/css/styles.css', __FILE__) );
+    wp_enqueue_style( 'dm-styles' );
+}
+add_action('wp_enqueue_scripts', 'dm_assets');
