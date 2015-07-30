@@ -39,8 +39,12 @@ function submitForm() {
             dmPrinciple = Number(dmAmount); //Set the global principle variable for the chart
             dmMonthlyPayment = dmCalculatePayment(dmAmount, dmRate, dmTerm); //calculate the monthly payment
 
-            /* adds the animation classes to remove container */
-            dmForm.className = "dm-form-container animated fadeOutDown";
+            //display monthly payment
+            document.getElementById('dm-monthly-payment').innerHTML = '$'+dmMonthlyPayment.toFixed(2);
+
+
+            /* Animations */
+            dmForm.className = "dm-form-container animated fadeOutDown"; // adds the animation classes to remove container
 
             /*
             * Uses the 'one' function to check if animation has happened.
@@ -77,7 +81,7 @@ function dmCalculatePayment (amount, rate, term) {
     monthlyPayment = amount * ((rate * (Math.pow((1+rate),term))) / (Math.pow((1+rate),term) - 1)); //calculate monthly payment
 
     return monthlyPayment; //return the monthly payment
-}
+} //end calculate payment function
 
 /* validation */
 function validateAmount(amount) { //function takes the input value
@@ -150,7 +154,7 @@ function validateTerm(term) { //function takes the input value
     }
 
     return validation;
-} //end validateRate function
+} //end validateTerm function
 
 /*
  * GOOGLE CHARTS
