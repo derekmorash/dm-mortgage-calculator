@@ -6,9 +6,9 @@ var dmChart = document.getElementById('dm-chart-container');
 var dmSubmit = document.getElementById('dm-submit');
 
 /* regex */
-var dmAmountRegex = /^\$?(?=.)(?:[1-9]\d{0,2}(?:,?\d{3})*)?(?:\.\d{2})?$/;
-var dmRateRegex = /^\$?(?=.)(?:[1-9]\d{0,2}(?:,?\d{3})*)?(?:\.\d{2})?$/;
-var dmTermRegex = /^([^.0-]\d+|\d)$/gm;
+var dmAmountRegex = /^\d+(\.\d{2})?$/;
+var dmRateRegex = /^\d+(\.\d{2})?$/;
+var dmTermRegex = /^\d{1,2}$/;
 
 /* animation event listener array */
 var endAnimation = ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', 'oanimationend', 'animationend'];
