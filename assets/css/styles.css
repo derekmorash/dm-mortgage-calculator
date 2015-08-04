@@ -1,49 +1,48 @@
 .dm-widget {
-  margin: 0 auto;
-  display: block;
-  height: 480px;
-  width: 250px;
-  background-color: #ffffff;
-  border: 3px #999999 solid;
-  overflow: hidden;
-  font-family: arial, sans-serif;
+    margin: 0 auto !important;
+    display: block !important;
+    height: 480px !important;
+    width: 250px !important;
+    overflow: hidden;
+    font-family: arial, sans-serif;
 }
 
 .dm-widget h2 {
-  text-align: center;
-  padding-top: 5px;
-  color: #920028;
+    text-align: center !important;
+    padding-top: 5px;
+}
+
+.dm-widget h3 {
+    text-align: center !important;
+    padding-top: 5px;
 }
 
 .dm-form-container {
-    max-width: 100%;
-  margin: 0 auto;
-  /*background-color: lightcoral;*/
+    max-width: 100% !important;
+    margin: 0 auto !important;
 }
 
 .dm-form {
-  max-width: 100%;
-  padding: 5px;
+    max-width: 100% !important;
+    padding: 5px;
 }
 
 .dm-form fieldset {
-  border: none;
-    max-width: 100%;
+    border: none !important;
+    max-width: 100% !important;
     display: table;
 }
 
 .dm-form-label {
-  color: #920028;
-  /*float: left;*/
-  /*clear: both;*/
+    /*color: #920028;*/
 }
 
 .dm-form-input {
-  display: block;
-  margin: 0;
-  max-width: 100%;
-  appearance: none;
-  box-shadow: none;
+    display: block;
+    margin: 0;
+    max-width: 100%;
+    appearance: none;
+    box-shadow: none;
     padding: 10px;
     border: solid 1px #dcdcdc;
     transition: box-shadow 0.3s, border 0.3s;
@@ -56,107 +55,108 @@
 }
 
 .dm-chart-container {
-  display: block;
-  max-width: 250px;
-  margin: 0 auto;
-  text-align: center;
+    display: block;
+    max-width: 250px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 #dm-chart {
-  display: block;
-  margin: 0 auto;
+    display: block !important;
+    margin: 0 auto !important;
 }
 
 .dm-bold {
-  font-weight: bold;
+    font-weight: bold !important;
 }
 
 /* Error Messages */
 .dm-error {
-    background-color: red;
-    font-size: small;
+    background-color: red !important;
+    color: white !important;
+    font-size: small !important;
 }
 
 .dm-highlight-box {
-    border: 1px red solid;
+    border: 1px red solid !important;
 }
 
 /* hide elements */
 .dm-hidden {
-  display: none;
+    display: none !important;
 }
 
 /* Animations */
 /* from animate.css */
 .animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
 
 /* Fade In Down */
 
 @-webkit-keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
 
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
 }
 
 @keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
 
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
 }
 
 .fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
 }
 
 /* Fade Out Down */
 
 @-webkit-keyframes fadeOutDown {
-  0% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 1;
+    }
 
-  100% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
 }
 
 @keyframes fadeOutDown {
-  0% {
-    opacity: 1;
-  }
+    0% {
+        opacity: 1;
+    }
 
-  100% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
 }
 
 .fadeOutDown {
-  -webkit-animation-name: fadeOutDown;
-  animation-name: fadeOutDown;
+    -webkit-animation-name: fadeOutDown;
+    animation-name: fadeOutDown;
 }
