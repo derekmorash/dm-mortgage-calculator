@@ -81,28 +81,25 @@ function one(element, eventName, callback) {
 function dmCalculatePayment (amount, rate, term, frequency) {
     var monthlyPayment;
     amount = Number(amount);
+    rate = (Number(rate) / 100) / 12; //calculate monthly interest rate
+    term = Number(term) * 12; //calculate the number of months
+
+    monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
+
 
     //calculation depending on frequency eg. monthly, weekly, etc
     if(frequency === 'monthly') {
-        rate = (Number(rate) / 100) / 12; //calculate monthly interest rate
-        term = Number(term) * 12; //calculate the number of months
 
-        monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
     } else if(frequency === 'semimonthly') {
-        rate = (Number(rate) / 100) / 12; //calculate semi-monthly interest rate
-        term = Number(term) * 12; //calculate the number of months
 
-        monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
     } else if(frequency === 'weekly') {
-        rate = (Number(rate) / 100) / 52; //calculate weekly interest rate
-        term = Number(term) * 52; //calculate the number of months
 
-        monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
     } else if(frequency === 'biweekly') {
-        rate = (Number(rate) / 100) / 12; //calculate bi-weekly interest rate
-        term = Number(term) * 12; //calculate the number of months
 
-        monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
+    } else if(frequency === 'weeklyAccel') {
+
+    } else if(frequency === 'biweeklyAccel') {
+
     }
 
     return monthlyPayment; //return the monthly payment
