@@ -29,6 +29,7 @@ function submitForm() {
         var dmAmount = document.getElementById('dm-amount').value;
         var dmRate = document.getElementById('dm-rate').value;
         var dmTerm = document.getElementById('dm-term').value;
+        var dmPaymentFrequency = document.getElementById('dm-payment-frequency').value;
 
         var dmAmountValidate = validateAmount(dmAmount); //validated the amount input
         var dmRateValidate = validateRate(dmRate); //validate the rate input
@@ -39,7 +40,7 @@ function submitForm() {
             /* Set chart values */
             dmPrinciple = Number(dmAmount); //Set the global principle variable for the chart
 
-            dmMonthlyPayment = dmCalculatePayment(dmAmount, dmRate, dmTerm); //calculate the monthly payment
+            dmMonthlyPayment = dmCalculatePayment(dmAmount, dmRate, dmTerm, dmPaymentFrequency); //calculate the monthly payment
             document.getElementById('dm-monthly-payment').innerHTML = '$'+dmMonthlyPayment.toFixed(2); //display monthly payment
 
             dmOverallPayment = dmMonthlyPayment * (dmTerm*12); //multiply the monthly payment by the number of months
@@ -58,7 +59,7 @@ function submitForm() {
             * Need to do one for each vendor prefix for full browser support.
             */
             for (var i = 0; i < endAnimation.length; i++) { //loop through each vendor prefix
-            one(dmForm, endAnimation[i], function(event) {
+                one(dmForm, endAnimation[i], function(event) {
                     dmForm.className = "dm-form-container dm-hidden"; //hide the form container
                     dmChart.className = "dm-chart-container animated fadeInDown"; //animate the chart container to come into view
                     drawChart(); //draw the chart
@@ -77,13 +78,32 @@ function one(element, eventName, callback) {
 }
 
 /* calculate monthly payment */
-function dmCalculatePayment (amount, rate, term) {
+function dmCalculatePayment (amount, rate, term, frequency) {
     var monthlyPayment;
     amount = Number(amount);
-    rate = (Number(rate)/100)/12; //calculate monthly interest rate
-    term = Number(term)*12; //calculate the number of months
 
-    monthlyPayment = amount * ((rate * (Math.pow((1+rate),term))) / (Math.pow((1+rate),term) - 1)); //calculate monthly payment
+    //calculation depending on frequency eg. monthly, weekly, etc
+    if(frequency === 'monthly') {
+        rate = (Number(rate) / 100) / 12; //calculate monthly interest rate
+        term = Number(term) * 12; //calculate the number of months
+
+        monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
+    } else if(frequency === 'semimonthly') {
+        rate = (Number(rate) / 100) / 12; //calculate semi-monthly interest rate
+        term = Number(term) * 12; //calculate the number of months
+
+        monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
+    } else if(frequency === 'weekly') {
+        rate = (Number(rate) / 100) / 52; //calculate weekly interest rate
+        term = Number(term) * 52; //calculate the number of months
+
+        monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
+    } else if(frequency === 'biweekly') {
+        rate = (Number(rate) / 100) / 12; //calculate bi-weekly interest rate
+        term = Number(term) * 12; //calculate the number of months
+
+        monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
+    }
 
     return monthlyPayment; //return the monthly payment
 } //end calculate payment function

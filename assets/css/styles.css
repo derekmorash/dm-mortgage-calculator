@@ -33,24 +33,6 @@
     display: table;
 }
 
-.dm-payment-method {
-    float:left;
-    clear:none;
-}
-
-.dm-payment-method label {
-    float:left;
-    clear:none;
-    display:block;
-    padding: 2px 5px 0 0 ;
-}
-
-.dm-payment-method input {
-    float:left;
-    clear:none;
-    margin: 4px 5px 0 2px;
-}
-
 .dm-form-label {
     /*color: #920028;*/
 }
