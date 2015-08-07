@@ -16,8 +16,6 @@ var endAnimation = ['webkitAnimationEnd', 'mozAnimationEnd', 'MSAnimationEnd', '
 /* chart values */
 var dmPrinciple;
 var dmInterest;
-var dmMonthlyPayment;
-var dmOverallPayment;
 
 /* Empty boxes error message */
 var dmEmptyError = document.getElementById('dm-empty'); //made this global because it is used multiple times
@@ -40,14 +38,9 @@ function submitForm() {
             /* Set chart values */
             dmPrinciple = Number(dmAmount); //Set the global principle variable for the chart
 
-            dmMonthlyPayment = dmCalculatePayment(dmAmount, dmRate, dmTerm, dmPaymentFrequency); //calculate the monthly payment
-            document.getElementById('dm-monthly-payment').innerHTML = '$'+dmMonthlyPayment.toFixed(2); //display monthly payment
+            /* Calculate Payment */
+            dmCalculatePayment(dmAmount, dmRate, dmTerm, dmPaymentFrequency);
 
-            dmOverallPayment = dmMonthlyPayment * (dmTerm*12); //multiply the monthly payment by the number of months
-            document.getElementById('dm-overall-payment').innerHTML = '$'+dmOverallPayment.toFixed(2); //display overall payment
-
-            dmInterest = dmOverallPayment - dmAmount; //get the amount of interest to be payed
-            dmInterest = Number(dmInterest.toFixed(2));
 
             /* Animations */
             dmForm.className = "dm-form-container animated fadeOutDown"; // adds the animation classes to remove container
@@ -80,16 +73,24 @@ function one(element, eventName, callback) {
 /* calculate monthly payment */
 function dmCalculatePayment (amount, rate, term, frequency) {
     var monthlyPayment;
+    var overallPayment;
+    var monthlyRate = (Number(rate) / 100) / 12; //calculate monthly interest rate
+    var numMonths = Number(term) * 12; //calculate the number of months
     amount = Number(amount);
-    rate = (Number(rate) / 100) / 12; //calculate monthly interest rate
-    term = Number(term) * 12; //calculate the number of months
-
-    monthlyPayment = amount * ((rate * (Math.pow((1 + rate), term))) / (Math.pow((1 + rate), term) - 1)); //calculate monthly payment
-
+    //term = Number(term) * 12; //calculate the number of months
+    
+    /* calculate monthly payment */
+    monthlyPayment = amount * ((monthlyRate * (Math.pow((1 + monthlyRate), numMonths))) / (Math.pow((1 + monthlyRate), numMonths) - 1));
 
     //calculation depending on frequency eg. monthly, weekly, etc
     if(frequency === 'monthly') {
+        document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+monthlyPayment.toFixed(2)+'</span> per month'; //display monthly payment
 
+        overallPayment = monthlyPayment * (numMonths); //multiply the monthly payment by the number of months
+        document.getElementById('dm-overall-payment').innerHTML = '$'+overallPayment.toFixed(2); //display overall payment
+
+        dmInterest = overallPayment - amount; //get the amount of interest to be payed
+        dmInterest = Number(dmInterest.toFixed(2));
     } else if(frequency === 'semimonthly') {
 
     } else if(frequency === 'weekly') {
@@ -101,8 +102,6 @@ function dmCalculatePayment (amount, rate, term, frequency) {
     } else if(frequency === 'biweeklyAccel') {
 
     }
-
-    return monthlyPayment; //return the monthly payment
 } //end calculate payment function
 
 /* validation */
