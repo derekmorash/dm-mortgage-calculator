@@ -137,7 +137,7 @@ function dmCalculatePayment (amount, rate, term, frequency) {
         dmInterest = Number(dmInterest.toFixed(2));
     } else if(frequency === 'weeklyAccel') {
         var weeklyAccelPayment = (monthlyPayment / 4);
-        var yearlyAccelPayment;
+        var overallAccelPayment;
 
         //display weekly payment
         document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+weeklyAccelPayment.toFixed(2)+'</span> per week';
@@ -146,13 +146,13 @@ function dmCalculatePayment (amount, rate, term, frequency) {
         yearlyPayment = monthlyPayment * (numMonths);
 
         //multiply the payment by the number of payments per year (52)
-        yearlyAccelPayment = (Number(weeklyAccelPayment) * 52) * term;
+        overallAccelPayment = ((Number(weeklyAccelPayment) * 52) * term) - (yearlyPayment - amount);
 
         //display overall payment
-        document.getElementById('dm-overall-payment').innerHTML = '$'+yearlyAccelPayment.toFixed(2);
+        document.getElementById('dm-overall-payment').innerHTML = '$'+yearlyPayment.toFixed(2);
 
         //get the amount of interest to be payed
-        dmInterest = yearlyAccelPayment - amount;
+        dmInterest = overallAccelPayment - amount;
         dmInterest = Number(dmInterest.toFixed(2));
     } else if(frequency === 'biweeklyAccel') {
 
