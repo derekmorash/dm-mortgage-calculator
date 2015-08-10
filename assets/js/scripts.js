@@ -41,7 +41,6 @@ function submitForm() {
             /* Calculate Payment */
             dmCalculatePayment(dmAmount, dmRate, dmTerm, dmPaymentFrequency);
 
-
             /* Animations */
             dmForm.className = "dm-form-container animated fadeOutDown"; // adds the animation classes to remove container
 
@@ -73,7 +72,7 @@ function one(element, eventName, callback) {
 /* calculate monthly payment */
 function dmCalculatePayment (amount, rate, term, frequency) {
     var monthlyPayment;
-    var overallPayment;
+    var yearlyPayment;
     var monthlyRate = (Number(rate) / 100) / 12; //calculate monthly interest rate
     var numMonths = Number(term) * 12; //calculate the number of months
     amount = Number(amount);
@@ -87,12 +86,12 @@ function dmCalculatePayment (amount, rate, term, frequency) {
         document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+monthlyPayment.toFixed(2)+'</span> per month';
 
         //multiply the monthly payment by the number of months
-        overallPayment = monthlyPayment * (numMonths);
+        yearlyPayment = monthlyPayment * (numMonths);
         //display overall payment
-        document.getElementById('dm-overall-payment').innerHTML = '$'+overallPayment.toFixed(2);
+        document.getElementById('dm-overall-payment').innerHTML = '$'+yearlyPayment.toFixed(2);
 
         //get the amount of interest to be payed
-        dmInterest = overallPayment - amount;
+        dmInterest = yearlyPayment - amount;
         dmInterest = Number(dmInterest.toFixed(2));
     } else if(frequency === 'semimonthly') {
         var semiMonthlyPayment = monthlyPayment/2;
@@ -101,12 +100,12 @@ function dmCalculatePayment (amount, rate, term, frequency) {
         document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+semiMonthlyPayment.toFixed(2)+'</span> twice per month';
 
         //multiply the monthly payment by the number of months
-        overallPayment = monthlyPayment * (numMonths);
+        yearlyPayment = monthlyPayment * (numMonths);
         //display overall payment
-        document.getElementById('dm-overall-payment').innerHTML = '$'+overallPayment.toFixed(2);
+        document.getElementById('dm-overall-payment').innerHTML = '$'+yearlyPayment.toFixed(2);
 
         //get the amount of interest to be payed
-        dmInterest = overallPayment - amount;
+        dmInterest = yearlyPayment - amount;
         dmInterest = Number(dmInterest.toFixed(2));
     } else if(frequency === 'weekly') {
         var weeklyPayment = (monthlyPayment * 12) / 52;
@@ -115,29 +114,46 @@ function dmCalculatePayment (amount, rate, term, frequency) {
         document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+weeklyPayment.toFixed(2)+'</span> per week';
 
         //multiply the monthly payment by the number of months
-        overallPayment = monthlyPayment * (numMonths);
+        yearlyPayment = monthlyPayment * (numMonths);
         //display overall payment
-        document.getElementById('dm-overall-payment').innerHTML = '$'+overallPayment.toFixed(2);
+        document.getElementById('dm-overall-payment').innerHTML = '$'+yearlyPayment.toFixed(2);
 
         //get the amount of interest to be payed
-        dmInterest = overallPayment - amount;
+        dmInterest = yearlyPayment - amount;
         dmInterest = Number(dmInterest.toFixed(2));
     } else if(frequency === 'biweekly') {
         var biweeklyPayment = (monthlyPayment * 12) / 26;
 
         //display biweekly payment
-        document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+biweeklyPayment.toFixed(2)+'</span> per week';
+        document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+biweeklyPayment.toFixed(2)+'</span> twice per week';
 
         //multiply the monthly payment by the number of months
-        overallPayment = monthlyPayment * (numMonths);
+        yearlyPayment = monthlyPayment * (numMonths);
         //display overall payment
-        document.getElementById('dm-overall-payment').innerHTML = '$'+overallPayment.toFixed(2);
+        document.getElementById('dm-overall-payment').innerHTML = '$'+yearlyPayment.toFixed(2);
 
         //get the amount of interest to be payed
-        dmInterest = overallPayment - amount;
+        dmInterest = yearlyPayment - amount;
         dmInterest = Number(dmInterest.toFixed(2));
     } else if(frequency === 'weeklyAccel') {
+        var weeklyAccelPayment = (monthlyPayment / 4);
+        var yearlyAccelPayment;
 
+        //display weekly payment
+        document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+weeklyAccelPayment.toFixed(2)+'</span> per week';
+
+        //multiply the monthly payment by the number of months
+        yearlyPayment = monthlyPayment * (numMonths);
+
+        //multiply the payment by the number of payments per year (52)
+        yearlyAccelPayment = (Number(weeklyAccelPayment) * 52) * term;
+
+        //display overall payment
+        document.getElementById('dm-overall-payment').innerHTML = '$'+yearlyAccelPayment.toFixed(2);
+
+        //get the amount of interest to be payed
+        dmInterest = yearlyAccelPayment - amount;
+        dmInterest = Number(dmInterest.toFixed(2));
     } else if(frequency === 'biweeklyAccel') {
 
     }
