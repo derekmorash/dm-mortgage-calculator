@@ -125,7 +125,7 @@ function dmCalculatePayment (amount, rate, term, frequency) {
         var biweeklyPayment = (monthlyPayment * 12) / 26;
 
         //display biweekly payment
-        document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+biweeklyPayment.toFixed(2)+'</span> twice per week';
+        document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+biweeklyPayment.toFixed(2)+'</span> every two weeks';
 
         //multiply the monthly payment by the number of months
         yearlyPayment = monthlyPayment * (numMonths);

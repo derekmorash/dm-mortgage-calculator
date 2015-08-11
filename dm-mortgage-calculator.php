@@ -56,7 +56,15 @@ class dm_mortgage_widget extends WP_Widget {
                         <label for="dm-term" class="dm-form-label">Mortgage Term: (years)</label>
                     <input class="dm-form-input" id="dm-term" type='text' value="<?php echo $instance['dmTerm']; ?>" placeholder="Mortgage Term (years)" />
                     </fieldset>
-
+                    <fieldset id="dm-payment-method">
+                        <label for="dm-payment-frequency" class="dm-form-label">Payment Frequency:</label>
+                        <select name="dm-payment-frequency" id="dm-payment-frequency" class="dm-payment-frequency">
+                            <option value="monthly">Monthly</option>
+                            <option value="semimonthly">Semi-Monthly</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="biweekly">Bi-Weekly</option>
+                        </select>
+                    </fieldset>
                     <fieldset>
                         <input id="dm-submit" type="button" value="Submit">
                     </fieldset>
@@ -71,8 +79,9 @@ class dm_mortgage_widget extends WP_Widget {
                 <p>
                     Estimated payment for your home
                 </p>
-                <p><span id="dm-monthly-payment" class="dm-bold"></span> per month</p>
+                <p id="dm-monthly-payment"></p>
                 <p><span id="dm-overall-payment" class="dm-bold"></span> overall</p>
+                <p class="hidden" id="dm-accelerated-savings"></p>
                 <div id="dm-chart"></div>
             </div>
         </div>
