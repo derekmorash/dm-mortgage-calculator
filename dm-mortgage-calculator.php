@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: DM Mortgage Calculator
-Plugin URI:  dm-mortgage-calculator.php
+Plugin URI:  https://github.com/derekmorash/dm-mortgage-calculator
 Description: A simple Mortgage Calculator widget.
 Version:     0.1
 Author:      Derek Morash
