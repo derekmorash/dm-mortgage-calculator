@@ -42,7 +42,7 @@ function submitForm() {
             dmCalculatePayment(dmAmount, dmRate, dmTerm, dmPaymentFrequency);
 
             /* Animations */
-            dmForm.className = "dm-form-container animated fadeOutDown"; // adds the animation classes to remove container
+            dmForm.className = "dm-form-container dm-animated fadeOutDown"; // adds the animation classes to remove container
 
             /*
             * Uses the 'one' function to check if animation has happened.
@@ -53,12 +53,12 @@ function submitForm() {
             for (var i = 0; i < endAnimation.length; i++) { //loop through each vendor prefix
                 one(dmForm, endAnimation[i], function(event) {
                     dmForm.className = "dm-form-container dm-hidden"; //hide the form container
-                    dmChart.className = "dm-chart-container animated fadeInDown"; //animate the chart container to come into view
+                    dmChart.className = "dm-chart-container dm-animated fadeInDown"; //animate the chart container to come into view
                     drawChart(); //draw the chart
                 });
             } //end for loop
         } //end validate if
-    } //end on click
+    }; //end on click
 } //end submit form function
 
 /* checks if event has happened or not */
@@ -125,7 +125,7 @@ function dmCalculatePayment (amount, rate, term, frequency) {
         var biweeklyPayment = (monthlyPayment * 12) / 26;
 
         //display biweekly payment
-        document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+biweeklyPayment.toFixed(2)+'</span> every two weeks';
+        document.getElementById('dm-monthly-payment').innerHTML = '<span class="dm-bold">$'+biweeklyPayment.toFixed(2)+'</span> twice per week';
 
         //multiply the monthly payment by the number of months
         yearlyPayment = monthlyPayment * (numMonths);
@@ -222,14 +222,16 @@ google.load('visualization', '1.0', {
 
 // Set a callback to run when the Google Visualization API is loaded.
 /*google.setOnLoadCallback(drawChart);*/
-google.setOnLoadCallback(submitForm);
+if(dmSubmit) {
+  google.setOnLoadCallback(submitForm);
+}
 
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
 function drawChart() {
 
-  // Create the data table.        
+  // Create the data table.
   var data = google.visualization.arrayToDataTable([
     ['Payment', 'Principle ($)', 'Interest ($)', {
       role: 'annotation'
